@@ -10,10 +10,11 @@ const IssueSchema = new mongoose.Schema({
     title: String,
     description: String,
     type: String,
-    location: String,
+    location: Object,
     status: String,
     severity: String,
     issueDate: Number,
 });
 
 module.exports = mongoose.model("Issue", IssueSchema);
+
