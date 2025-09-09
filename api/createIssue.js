@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
             title: body.title,
             description: body.description,
             type: body.type,
-            location: "Bhilai",
+            location: body.location,
             status: "Open",
             severity: "High",
             issueDate: Date.now(),
