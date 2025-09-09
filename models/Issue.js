@@ -12,9 +12,9 @@ const IssueSchema = new mongoose.Schema({
     type: String,
     location: Object,
     status: String,
+    feedback: String,
     severity: String,
     issueDate: Number,
 });
 
 module.exports = mongoose.model("Issue", IssueSchema);
-
