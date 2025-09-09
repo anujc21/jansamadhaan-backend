@@ -5,6 +5,7 @@ const cors = require("cors");
 const createIssue = require("./api/createIssue");
 const getUserIssues = require("./api/getUserIssues");
 const getDepartmentIssues = require("./api/getDepartmentIssues");
+const updateIssue = require("./api/updateIssue");
 
 require("dotenv").config();
 
@@ -14,7 +15,7 @@ const MONGODB_URI = process.env.MONGODB_URI;
 
 const corsOptions = {
     origin: "*",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT"],
     allowedHeaders: [
         "content-type",
         "authorization",
@@ -55,9 +56,11 @@ app.get("/get-user-issues", (req, res) => {
 });
 
 app.get("/get-department-issues", (req, res) => {
-    console.log(1);
-
     getDepartmentIssues(req, res);
+});
+
+app.put("/update-issue", (req, res) => {
+    updateIssue(req, res);
 });
 
 run();
