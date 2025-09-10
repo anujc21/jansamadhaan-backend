@@ -7,6 +7,7 @@ const IssueSchema = new mongoose.Schema({
     userID: String,
     photos: [String],
     username: String,
+    email: String,
     title: String,
     description: String,
     type: String,
