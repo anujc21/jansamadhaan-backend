@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
             userID: body.userID,
             photos: body.photos,
             username: body.username,
+            email: body.email,
             title: body.title,
             description: body.description,
             type: body.type,
