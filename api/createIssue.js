@@ -1,5 +1,6 @@
 const Issue = require("../models/Issue");
 const { randomID } = require("../utils");
+const submitEmail = require("./submitEmail");
 
 module.exports = async (req, res) => {
     try {
@@ -24,6 +25,16 @@ module.exports = async (req, res) => {
 
         res.json({
             message: "Success",
+        });
+
+        submitEmail({
+            description: body.description,
+            issueType: body.issueType,
+            ulb: body.ulbID,
+            department: body.departmentID,
+            userName: body.username,
+            userEmail: body.email,
+            location: body.location,
         });
     } catch (error) {
         console.log(error);
