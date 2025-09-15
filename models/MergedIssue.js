@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
-const IssueSchema = new mongoose.Schema({
+const MergedIssueSchema = new mongoose.Schema({
     id: String,
+    issues: [String],
     departmentID: String,
     ulbID: String,
-    userID: String,
+    userIDs: [String],
     photos: [String],
-    username: String,
-    email: String,
+    usernames: [String],
+    emails: [String],
     title: String,
     description: String,
     type: String,
@@ -15,7 +16,8 @@ const IssueSchema = new mongoose.Schema({
     status: String,
     feedback: String,
     severity: String,
-    issueDate: Number,
+    weightage: Number,
+    issueDates: [Number],
 });
 
-export default mongoose.model("Issue", IssueSchema);
+export default mongoose.model("MergedIssue", MergedIssueSchema);
