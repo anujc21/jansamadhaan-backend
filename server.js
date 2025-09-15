@@ -1,13 +1,17 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 
-const createIssue = require("./api/createIssue");
-const getUserIssues = require("./api/getUserIssues");
-const getDepartmentIssues = require("./api/getDepartmentIssues");
-const updateIssue = require("./api/updateIssue");
+import loginUser from "./api/loginUser.js";
+import editProfile from "./api/editProfile.js";
+import createIssue from "./api/createIssue.js";
+import getUserIssues from "./api/getUserIssues.js";
+import getDepartmentIssues from "./api/getDepartmentIssues.js";
+import updateIssue from "./api/updateIssue.js";
 
-require("dotenv").config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,6 +49,14 @@ const run = async () => {
 
 app.get("/", (req, res) => {
     res.send("API is running...");
+});
+
+app.post("/login-user", (req, res) => {
+    loginUser(req, res);
+});
+
+app.put("/edit-profile", (req, res) => {
+    editProfile(req, res);
 });
 
 app.post("/create-issue", (req, res) => {

@@ -10,4 +10,4 @@ const randomID = () => {
     );
 };
 
-module.exports = { randomID };
+export { randomID };
