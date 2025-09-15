@@ -1,21 +1,20 @@
-import Issue from "../models/Issue.js";
+import User from "../models/User.js";
 
 export default async (req, res) => {
     try {
         const body = req.body;
 
-        await Issue.updateOne(
+        const user = await User.findOneAndUpdate(
             { id: body.id },
             {
-                $set: {
-                    status: body.status,
-                    feedback: body.feedback,
-                },
-            }
+                $set: { ...body.updates, newUser: false },
+            },
+            { new: true }
         );
 
         res.json({
             message: "Success",
+            user,
         });
     } catch (error) {
         console.log(error);

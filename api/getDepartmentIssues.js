@@ -1,6 +1,6 @@
-const Issue = require("../models/Issue");
+import Issue from "../models/Issue.js";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
     try {
         const headers = req.headers;
 

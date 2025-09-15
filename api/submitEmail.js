@@ -1,6 +1,7 @@
-const axios = require("axios");
+import axios from "axios";
+import FormData from "form-data";
 
-module.exports = async ({
+export default async ({
     description,
     issueType,
     ulb,

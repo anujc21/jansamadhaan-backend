@@ -1,12 +1,35 @@
-const Issue = require("../models/Issue");
-const { randomID } = require("../utils");
-const submitEmail = require("./submitEmail");
+import Issue from "../models/Issue.js";
+import { randomID } from "../utils.js";
+import mergeIssues from "./mergeIssues.js";
+import submitEmail from "./submitEmail.js";
+import detectSeverity from "./detectSeverity.js";
+import detectSpam from "./detectSpam.js";
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
     try {
         const body = req.body;
 
-        await Issue.insertOne({
+        const spam = await detectSpam(
+            body.title,
+            body.description,
+            body.issueType
+        );
+
+        if (spam) {
+            console.log("Spam issue detected: ", body.title);
+
+            return res.status(400).json({
+                message: "Spam issue detected",
+            });
+        }
+
+        const severity = await detectSeverity(
+            body.title,
+            body.description,
+            body.issueType
+        );
+
+        const issueObject = {
             id: randomID(),
             departmentID: body.departmentID,
             ulbID: body.ulbID,
@@ -19,9 +42,11 @@ module.exports = async (req, res) => {
             type: body.type,
             location: body.location,
             status: "Open",
-            severity: "High",
+            severity,
             issueDate: Date.now(),
-        });
+        };
+
+        await Issue.insertOne(issueObject);
 
         res.json({
             message: "Success",
@@ -36,6 +61,8 @@ module.exports = async (req, res) => {
             userEmail: body.email,
             location: body.location,
         });
+
+        mergeIssues(issueObject);
     } catch (error) {
         console.log(error);
 
